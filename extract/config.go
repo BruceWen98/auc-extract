@@ -24,7 +24,7 @@ type AuctionConfig struct {
 	ExtractPatternOneLine      string `yaml:"extract_pattern_one_line"`
 	ExtractPatternMultipleLine string `yaml:"extract_pattern_multiple_line"`
 	BidIndex                   int    `yaml:"bid_index"`
-	TitleIndex                 int    `yaml:"title_index"`
+	TitleIndex                 string `yaml:"title_index"` //a list of index separated by '+' for concatenation
 	PriceIndex                 int    `yaml:"price_index"`
 
 	ExtractEstimatePattern string `yaml:"extract_estimation_pattern"`
@@ -47,11 +47,12 @@ func ReadConfig(file string) *Config {
 	try.E(yaml.Unmarshal(content, &config))
 
 	for i := range config.Aucs {
+		//some default values
 		if config.Aucs[i].BidIndex == 0 {
 			config.Aucs[i].BidIndex = 1
 		}
-		if config.Aucs[i].TitleIndex == 0 {
-			config.Aucs[i].TitleIndex = 2
+		if config.Aucs[i].TitleIndex == "" {
+			config.Aucs[i].TitleIndex = "2"
 		}
 		if config.Aucs[i].PriceIndex == 0 {
 			config.Aucs[i].PriceIndex = 3

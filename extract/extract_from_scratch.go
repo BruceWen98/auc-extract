@@ -100,6 +100,23 @@ func ExtractAuction(threads int, auc AuctionConfig) {
 	savePriceResult(auc, priceResult)
 }
 
+func titleProcessing(titleIndex string, matches []string) string {
+	if len(titleIndex) == 0 || len(matches) == 0 {
+		return ""
+	}
+
+	titleIndexList := regexp.MustCompile(`\+`).Split(titleIndex, -1)
+	title := ""
+	for _, index := range titleIndexList {
+		index, err := strconv.Atoi(index)
+		if err != nil {
+			log.Fatalf("failed to convert title index to int: %v", err)
+		}
+		title += matches[index]
+	}
+	return title
+}
+
 func matchPrice(text, pat string, auc AuctionConfig) (bool, string, string, float64) {
 	var itemIndex string
 	var price float64
@@ -111,7 +128,8 @@ func matchPrice(text, pat string, auc AuctionConfig) (bool, string, string, floa
 	if matches != nil { //matched
 		var err error
 		itemIndex = matches[auc.BidIndex]
-		title = matches[auc.TitleIndex]
+		// title = matches[auc.TitleIndex]
+		title = titleProcessing(auc.TitleIndex, matches)
 		priceText := matches[auc.PriceIndex]
 		priceText = reNonDigit.ReplaceAllString(priceText, "")
 
