@@ -43,6 +43,10 @@ aucs:
   title_index: 2
   price_index: 4
 
+  extract_estimation_pattern: '(?m)^Estimate\s*\|\s*(HK\$|£|€|¥|\$)\s*(.*)-\s*(HK\$|£|€|¥|\$)(.*)'
+  estimation_low_index: 2
+  estimation_high_index: 4
+
   crop_size_and_offset: 1280x120+0+0
   psm: 6
 

@@ -1,5 +1,33 @@
 threads: 24
 aucs:
+
+# (0) config ✘
+- name: c_1IDl-L-quoE
+  input_path: /home/ubuntu/auction_videos/video_imgs/1IDl-L-quoE_Livestream | Impressionist and Modern Art Works on Paper and Day Sales | New York
+  output_path:  /home/ubuntu/ocr_results/c_1IDl-L-quoE
+  text_result_file: text_result.c_1IDl-L-quoE.csv
+  price_result_file: price_result.c_1IDl-L-quoE.csv
+
+  #find these details by run mage dataCheck:t01_find_min_and_max_frame <index of aucs>
+  start_frame: 15
+  end_frame: 851190
+  step: 15
+  report_interval: 5674
+
+  #after the above, run dataCheck:T02_check_frame 0 to get a sample result to decide the pattern
+  # The pattern need to have 3 parts, item, title, price
+  # 1230. Lauren Quin 354% + 2£& | Hot Mapped > HK$2,400,000
+
+  extract_pattern_one_line: '(?m)^LOT\s*(\d+[A-Z_]*)\s*(.*)\s*BID\s*\|\s*(HK\$|£|€|¥|\$)(.*)'
+  extract_pattern_multiple_line: '(?m)^LOT\s*(\d+[A-Z_]*)\s*(.*\n.*)\s*BID\s*\|\s*(HK\$|£|€|¥|\$)(.*)'
+  bid_index: 1
+  title_index: 2
+  price_index: 4
+
+  crop_size_and_offset: 1280x40+0+0
+  psm: 6
+
+# (1) config ✓
 - name: c_1tKEB-tTc28
   input_path: /home/ubuntu/auction_videos/video_imgs/1tKEB-tTc28_20th_21st Century Art Evening Sale and The Masterpiece Auction II From The Triazza Collection
   output_path:  /home/ubuntu/ocr_results/c_1tKEB-tTc28
@@ -23,3 +51,480 @@ aucs:
 
   crop_size_and_offset: 1280x120+0+0
   psm: 6
+
+# (2) config ✘
+- name: s_2zaTdRWmBAA
+  input_path: /home/ubuntu/auction_videos/video_imgs/2zaTdRWmBAA_LIVE from Hong Kong | The Autumn Sales
+  output_path:  /home/ubuntu/ocr_results/s_2zaTdRWmBAA
+  text_result_file: text_result.s_2zaTdRWmBAA.csv
+  price_result_file: price_result.s_2zaTdRWmBAA.csv
+
+  start_frame: 15
+  end_frame: 688515
+  step: 15
+  report_interval: 4590
+
+  extract_pattern_one_line: '(?m)^LOT\s*(\d+[A-Z_]*)\s*(.*)\s*BID\s*\|\s*(HK\$|£|€|¥|\$)(.*)'
+  extract_pattern_multiple_line: '(?m)^LOT\s*(\d+[A-Z_]*)\s*(.*\n.*)\s*BID\s*\|\s*(HK\$|£|€|¥|\$)(.*)'
+  bid_index: 1
+  title_index: 2
+  price_index: 4
+
+  extract_estimation_pattern: '(?m)^Estimate\s*\|\s*(HK\$|£|€|¥|\$)\s*(.*)-\s*(HK\$|£|€|¥|\$)(.*)'
+  estimation_low_index: 2
+  estimation_high_index: 4
+
+  crop_size_and_offset: 1280x60+0+0
+  psm: 6
+
+# (3) config ✓
+- name: c_3ClOsh4Ry34
+  input_path: /home/ubuntu/auction_videos/video_imgs/3ClOsh4Ry34_Livestream | 20th Century Evening Sale | New York
+  output_path:  /home/ubuntu/ocr_results/c_3ClOsh4Ry34
+  text_result_file: text_result.c_3ClOsh4Ry34.csv
+  price_result_file: price_result.c_3ClOsh4Ry34.csv
+
+  start_frame: 15
+  end_frame: 266580
+  step: 15
+  report_interval: 1770
+
+  extract_pattern_one_line: '(?m)^LOT\s*(\d+[A-Z_]*)\s*(.*)\s*BID\s*\|\s*(HK\$|£|€|¥|\$)(.*)'
+  extract_pattern_multiple_line: '(?m)^LOT\s*(\d+[A-Z_]*)\s*(.*\n.*)\s*BID\s*\|\s*(HK\$|£|€|¥|\$)(.*)'
+  bid_index: 1
+  title_index: 2
+  price_index: 4
+
+  extract_estimation_pattern: '(?m)^Estimate\s*\|\s*(HK\$|£|€|¥|\$)\s*(.*)-\s*(HK\$|£|€|¥|\$)(.*)'
+  estimation_low_index: 2
+  estimation_high_index: 4
+
+  crop_size_and_offset: 1280x67+0+0
+  psm: 6
+
+# (4) config ✓
+- name: c_3m-eWeH2uuE
+  input_path: /home/ubuntu/auction_videos/video_imgs/3m-eWeH2uuE_Livestream | 20th_21st Century Evening Sales | New York
+  output_path:  /home/ubuntu/ocr_results/c_3m-eWeH2uuE
+  text_result_file: text_result.c_3m-eWeH2uuE.csv
+  price_result_file: price_result.c_3m-eWeH2uuE.csv
+
+  start_frame: 15
+  end_frame: 434265
+  step: 15
+  report_interval: 2890
+
+  extract_pattern_one_line: '(?m)^LOT\s*(\d+[A-Z_]*)\s*(.*)\s*BID\s*\|\s*(HK\$|£|€|¥|\$)(.*)'
+  extract_pattern_multiple_line: '(?m)^LOT\s*(\d+[A-Z_]*)\s*(.*\n.*)\s*BID\s*\|\s*(HK\$|£|€|¥|\$)(.*)'
+  bid_index: 1
+  title_index: 2
+  price_index: 4
+
+  extract_estimation_pattern: '(?m)^Estimate\s*\|\s*(HK\$|£|€|¥|\$)\s*(.*)-\s*(HK\$|£|€|¥|\$)(.*)'
+  estimation_low_index: 2
+  estimation_high_index: 4
+
+  crop_size_and_offset: 1280x60+0+0
+  psm: 6
+
+# (5) config ✓
+# This input path is a string, because it has a colon.
+- name: c_4B62L9x1jmU
+  input_path: '/home/ubuntu/auction_videos/video_imgs/4B62L9x1jmU_Livestream | Visionary: The Paul G. Allen Collection Part I | New York'
+  output_path:  /home/ubuntu/ocr_results/c_4B62L9x1jmU
+  text_result_file: text_result.c_4B62L9x1jmU.csv
+  price_result_file: price_result.c_4B62L9x1jmU.csv
+
+  start_frame: 15
+  end_frame: 312045
+  step: 15
+  report_interval: 2080
+
+  extract_pattern_one_line: '(?m)^LOT\s*(\d+[A-Z_]*)\s*(.*)\s*BID\s*\|\s*(HK\$|£|€|¥|\$)(.*)'
+  extract_pattern_multiple_line: '(?m)^LOT\s*(\d+[A-Z_]*)\s*(.*\n.*)\s*BID\s*\|\s*(HK\$|£|€|¥|\$)(.*)'
+  bid_index: 1
+  title_index: 2
+  price_index: 4
+
+  extract_estimation_pattern: '(?m)^Estimate\s*\|\s*(HK\$|£|€|¥|\$)\s*(.*)-\s*(HK\$|£|€|¥|\$)(.*)'
+  estimation_low_index: 2
+  estimation_high_index: 4
+
+  crop_size_and_offset: 1280x60+0+0
+  psm: 6
+
+# (6) config 
+# This input path is a string, because it has a colon.
+- name: s_4xA6xYiTfSo
+  input_path: '/home/ubuntu/auction_videos/video_imgs/4xA6xYiTfSo_LIVE | The Now & Modern and Contemporary Auctions, ft. Face to Face: A Celebration of Portraiture'
+  output_path:  /home/ubuntu/ocr_results/s_4xA6xYiTfSo
+  text_result_file: text_result.s_4xA6xYiTfSo.csv
+  price_result_file: price_result.s_4xA6xYiTfSo.csv
+
+  start_frame: 15
+  end_frame: 324600
+  step: 15
+  report_interval: 2160
+
+  extract_pattern_one_line: '(?m)^.*(Current Bid)\s*([\d]+).(.*)(HK\$|£|€|¥|\$)([\d,. ]+)\s*(.*).*$'
+  extract_pattern_multiple_line: '(?m)^LOT\s*(\d+[A-Z_]*)\s*(.*\n.*)\s*BID\s*\|\s*(HK\$|£|€|¥|\$)(.*)'
+  bid_index: 2
+  title_index: 3
+  price_index: 5
+
+  extract_estimation_pattern: '(?m)^Estimate\s*:\s*([\d,]+)\s*-\s*([\d,]+)\s*GBP.*$'
+  estimation_low_index: 1
+  estimation_high_index: 2
+
+  crop_size_and_offset: 1280x125+0+0
+  psm: 6
+
+# (7) config 
+- name: s_4ydUj3vcdiI
+  input_path: /home/ubuntu/auction_videos/video_imgs/4ydUj3vcdiI_LIVE from New York | The Now and Contemporary Evening Auctions
+  output_path:  /home/ubuntu/ocr_results/s_4ydUj3vcdiI
+  text_result_file: text_result.s_4ydUj3vcdiI.csv
+  price_result_file: price_result.s_4ydUj3vcdiI.csv
+
+  start_frame: 15
+  end_frame: 327150
+  step: 15
+  report_interval: 2180
+
+  extract_pattern_one_line: '(?m)^.*(Current Bid)\s*([\d]+).(.*)(HK\$|£|€|¥|\$)([\d,. ]+)\s*(.*).*$'
+  extract_pattern_multiple_line: '(?m)^LOT\s*(\d+[A-Z_]*)\s*(.*\n.*)\s*BID\s*\|\s*(HK\$|£|€|¥|\$)(.*)'
+  bid_index: 2
+  title_index: 3
+  price_index: 5
+
+  extract_estimation_pattern: '(?m)^Estimate\s*:\s*([\d,]+)\s*-\s*([\d,]+)\s*GBP.*$'
+  estimation_low_index: 1
+  estimation_high_index: 2
+
+  crop_size_and_offset: 1280x125+0+0
+  psm: 6
+
+
+# (8) config
+- name: s_6Eib2ATflk8
+  input_path: /home/ubuntu/auction_videos/video_imgs/6Eib2ATflk8_LIVE from New York | Master Paintings & Sculpture Part I
+  output_path:  /home/ubuntu/ocr_results/s_6Eib2ATflk8
+  text_result_file: text_result.s_6Eib2ATflk8.csv
+  price_result_file: price_result.s_6Eib2ATflk8.csv
+
+  crop_size_and_offset: 1280x125+0+0
+
+# This input path is a string, because it has a colon.
+- name: c_6fhz6KonHsA
+  input_path: '/home/ubuntu/auction_videos/video_imgs/6fhz6KonHsA_20th_21st Century: London Evening Sale 5pm BST | 6pm CEST | 12pm EDT | 12am HKT'
+  output_path:  /home/ubuntu/ocr_results/c_6fhz6KonHsA
+  text_result_file: text_result.c_6fhz6KonHsA.csv
+  price_result_file: price_result.c_6fhz6KonHsA.csv
+
+  crop_size_and_offset: 1280x72+0+0
+
+- name: s_6gnX3Oyr3rM
+  input_path: /home/ubuntu/auction_videos/video_imgs/6gnX3Oyr3rM_LIVE from Sotheby'\''s New York Impressionist, Modern & Contemporary Art Evening Sale
+  output_path:  /home/ubuntu/ocr_results/s_6gnX3Oyr3rM
+  text_result_file: text_result.s_6gnX3Oyr3rM.csv
+  price_result_file: price_result.s_6gnX3Oyr3rM.csv
+
+  crop_size_and_offset: 1280x100+0+0
+
+- name: s_7cAYpIxMEb8
+  input_path: '/home/ubuntu/auction_videos/video_imgs/7cAYpIxMEb8_LIVE from New York | The Emily Fisher Landau Collection: An Era Defined Evening Auction'
+  output_path:  /home/ubuntu/ocr_results/s_7cAYpIxMEb8
+  text_result_file: text_result.s_7cAYpIxMEb8.csv
+  price_result_file: price_result.s_7cAYpIxMEb8.csv
+
+  crop_size_and_offset: 1280x128+0+0
+
+# This input path is a string, because it has a colon.
+- name: s_818l7c8TnpA
+  input_path: '/home/ubuntu/auction_videos/video_imgs/818l7c8TnpA_LIVE from London | Freddie Mercury: A World of His Own Evening Sale'
+  output_path:  /home/ubuntu/ocr_results/s_818l7c8TnpA
+  text_result_file: text_result.s_818l7c8TnpA.csv
+  price_result_file: price_result.s_818l7c8TnpA.csv
+
+  crop_size_and_offset: 1280x128+0+0
+
+- name: s_8XGa5Euvwco
+  input_path: /home/ubuntu/auction_videos/video_imgs/8XGa5Euvwco_LIVE from London | The Now & Contemporary Evening Auctions
+  output_path:  /home/ubuntu/ocr_results/s_8XGa5Euvwco
+  text_result_file: text_result.s_8XGa5Euvwco.csv
+  price_result_file: price_result.s_8XGa5Euvwco.csv
+
+  crop_size_and_offset: 1280x64+0+0
+
+- name: s_8s0hOuylgsE
+  input_path: /home/ubuntu/auction_videos/video_imgs/8s0hOuylgsE_LIVE from New York | The Now and Contemporary Evening Auctions
+  output_path:  /home/ubuntu/ocr_results/s_8s0hOuylgsE
+  text_result_file: text_result.s_8s0hOuylgsE.csv
+  price_result_file: price_result.s_8s0hOuylgsE.csv
+
+  crop_size_and_offset: 1280x128+0+0
+
+- name: c_9EOciwthMTI
+  input_path: /home/ubuntu/auction_videos/video_imgs/9EOciwthMTI_Livestream | 20th Century | Christie’s
+  output_path:  /home/ubuntu/ocr_results/c_9EOciwthMTI
+  text_result_file: text_result.c_9EOciwthMTI.csv
+  price_result_file: price_result.c_9EOciwthMTI.csv
+
+  crop_size_and_offset: 1280x68+0+0
+
+- name: c_9gmxMua9FP8
+  input_path: /home/ubuntu/auction_videos/video_imgs/9gmxMua9FP8_Livestream | 20th_21st Century Evening Sales | Hong Kong
+  output_path: /home/ubuntu/ocr_results/c_9gmxMua9FP8
+  text_result_file: text_result.c_9gmxMua9FP8.csv
+  price_result_file: price_result.c_9gmxMua9FP8.csv
+
+  crop_size_and_offset: 1280x120+0+0
+
+# This input path is a string, because it has a colon.
+- name: c_BWdzGRXjaiY
+  input_path: '/home/ubuntu/auction_videos/video_imgs/BWdzGRXjaiY_Livestream | The Collection of Sir Elton John: Opening Night | New York'
+  output_path:  /home/ubuntu/ocr_results/c_BWdzGRXjaiY
+  text_result_file: text_result.c_BWdzGRXjaiY.csv
+  price_result_file: price_result.c_BWdzGRXjaiY.csv
+
+  crop_size_and_offset: 1280x34+0+0
+
+- name: s_DsUOK63mrHo
+  input_path: /home/ubuntu/auction_videos/video_imgs/DsUOK63mrHo_LIVE from Hong Kong | The Now and Modern & Contemporary Evening Auctions
+  output_path:  /home/ubuntu/ocr_results/s_DsUOK63mrHo
+  text_result_file: text_result.s_DsUOK63mrHo.csv
+  price_result_file: price_result.s_DsUOK63mrHo.csv
+
+  crop_size_and_offset: 1280x128+0+0
+
+# This input path is a string, because it has a colon.
+- name: c_GBp3N3mHBzU
+  input_path: '/home/ubuntu/auction_videos/video_imgs/GBp3N3mHBzU_Livestream | 20th_21st Century: London Evening Sale followed by The Art of the Surreal Evening Sale'
+  output_path:  /home/ubuntu/ocr_results/c_GBp3N3mHBzU
+  text_result_file: text_result.c_GBp3N3mHBzU.csv
+  price_result_file: price_result.c_GBp3N3mHBzU.csv
+
+  crop_size_and_offset: 1280x77+0+0
+
+# This input path is a string, because it has a colon.
+- name: c_NGKAJwD7RyM
+  input_path: '/home/ubuntu/auction_videos/video_imgs/NGKAJwD7RyM_Livestream | 20th_21st Century: London Evening Sale 28 June 2pm BST_3pm CEST_ 9am EDT _ 9pm HKT'
+  output_path:  /home/ubuntu/ocr_results/c_NGKAJwD7RyM
+  text_result_file: text_result.c_NGKAJwD7RyM.csv
+  price_result_file: price_result.c_NGKAJwD7RyM.csv
+
+  crop_size_and_offset: 1280x75+0+0
+
+- name: s_N_aq4OUHan8
+  input_path: /home/ubuntu/auction_videos/video_imgs/N_aq4OUHan8_The Mo Ostin Collection Evening Auction & The Modern Evening Auction
+  output_path:  /home/ubuntu/ocr_results/s_N_aq4OUHan8
+  text_result_file: text_result.s_N_aq4OUHan8.csv
+  price_result_file: price_result.s_N_aq4OUHan8.csv
+
+  crop_size_and_offset: 1280x128+0+0
+
+# This input path is a string, because it has a colon.
+- name: c_QMZGAYS2gj8
+  input_path: '/home/ubuntu/auction_videos/video_imgs/QMZGAYS2gj8_Livestream | A Century of Art: The Gerald Fineberg Collection Part I | New York'
+  output_path:  /home/ubuntu/ocr_results/c_QMZGAYS2gj8
+  text_result_file: text_result.c_QMZGAYS2gj8.csv
+  price_result_file: price_result.c_QMZGAYS2gj8.csv
+
+  crop_size_and_offset: 1280x58+0+0
+
+- name: s_QRZNiUMBAUM
+  input_path: /home/ubuntu/auction_videos/video_imgs/QRZNiUMBAUM_LIVE FROM LONDON | Old Master & 19th Century Paintings Evening Auction
+  output_path:  /home/ubuntu/ocr_results/s_QRZNiUMBAUM
+  text_result_file: text_result.s_QRZNiUMBAUM.csv
+  price_result_file: price_result.s_QRZNiUMBAUM.csv
+
+  crop_size_and_offset: 1280x128+0+0
+
+- name: c_UFMVuhyw3wQ
+  input_path: /home/ubuntu/auction_videos/video_imgs/UFMVuhyw3wQ_Livestream | 20th Century Evening Sale | New York
+  output_path:  /home/ubuntu/ocr_results/c_UFMVuhyw3wQ
+  text_result_file: text_result.c_UFMVuhyw3wQ.csv
+  price_result_file: price_result.c_UFMVuhyw3wQ.csv
+
+  crop_size_and_offset: 1280x58+0+0
+
+- name: c_UKFGxJz4WmI
+  input_path: /home/ubuntu/auction_videos/video_imgs/UKFGxJz4WmI_Livestream | Post-Millennium Evening Sale | Hong Kong
+  output_path:  /home/ubuntu/ocr_results/c_UKFGxJz4WmI
+  text_result_file: text_result.c_UKFGxJz4WmI.csv
+  price_result_file: price_result.c_UKFGxJz4WmI.csv
+
+  crop_size_and_offset: 1280x125+0+0
+
+- name: c_UUMJnBbJcJM
+  input_path: /home/ubuntu/auction_videos/video_imgs/UUMJnBbJcJM_Livestream | Rare Watches Including the Property of Michael Schumacher | Geneva
+  output_path:  /home/ubuntu/ocr_results/c_UUMJnBbJcJM
+  text_result_file: text_result.c_UUMJnBbJcJM.csv
+  price_result_file: price_result.c_UUMJnBbJcJM.csv
+
+  crop_size_and_offset: 1280x90+0+0
+
+- name: s_UibJCHTg758
+  input_path: /home/ubuntu/auction_videos/video_imgs/UibJCHTg758_LIVE from London | Modern & Contemporary Evening Auction featuring The Now
+  output_path:  /home/ubuntu/ocr_results/s_UibJCHTg758
+  text_result_file: text_result.s_UibJCHTg758.csv
+  price_result_file: price_result.s_UibJCHTg758.csv
+
+  crop_size_and_offset: 1280x128+0+0
+
+- name: c_VPFnD6O0epE
+  input_path: /home/ubuntu/auction_videos/video_imgs/VPFnD6O0epE_Livestream | 20th_21st Century Art Evening Sales | Hong Kong
+  output_path:  /home/ubuntu/ocr_results/c_VPFnD6O0epE
+  text_result_file: text_result.c_VPFnD6O0epE.csv
+  price_result_file: price_result.c_VPFnD6O0epE.csv
+
+  crop_size_and_offset: 1280x125+0+0
+
+- name: s_W6lB1goeW7I
+  input_path: /home/ubuntu/auction_videos/video_imgs/W6lB1goeW7I_LIVE from New York | The Modern Evening Auction
+  output_path:  /home/ubuntu/ocr_results/s_W6lB1goeW7I
+  text_result_file: text_result.s_W6lB1goeW7I.csv
+  price_result_file: price_result.s_W6lB1goeW7I.csv
+
+  crop_size_and_offset: 1280x128+0+0
+
+- name: s_WH9Jltj0TFI
+  input_path: /home/ubuntu/auction_videos/video_imgs/WH9Jltj0TFI_LIVE from New York | The Masters Week Auctions
+  output_path:  /home/ubuntu/ocr_results/s_WH9Jltj0TFI
+  text_result_file: text_result.s_WH9Jltj0TFI.csv
+  price_result_file: price_result.s_WH9Jltj0TFI.csv
+
+  crop_size_and_offset: 1280x128+0+0
+
+- name: c_XDtUjirQSDE
+  input_path: /home/ubuntu/auction_videos/video_imgs/XDtUjirQSDE_Livestream | 20th_21st Century Art Evening Sales | Hong Kong
+  output_path:  /home/ubuntu/ocr_results/c_XDtUjirQSDE
+  text_result_file: text_result.c_XDtUjirQSDE.csv
+  price_result_file: price_result.c_XDtUjirQSDE.csv
+
+  crop_size_and_offset: 1280x58+0+0
+
+- name: c_YCjidYbaQ3g
+  input_path: /home/ubuntu/auction_videos/video_imgs/YCjidYbaQ3g_Livestream | Magnificent Jewels | Geneva
+  output_path:  /home/ubuntu/ocr_results/c_YCjidYbaQ3g
+  text_result_file: text_result.c_YCjidYbaQ3g.csv
+  price_result_file: price_result.c_YCjidYbaQ3g.csv
+
+  crop_size_and_offset: 1280x85+0+0
+
+- name: s_Yo51zLfhpQ0
+  input_path: /home/ubuntu/auction_videos/video_imgs/Yo51zLfhpQ0_LIVE from New York | The Now & Contemporary Evening Auctions
+  output_path:  /home/ubuntu/ocr_results/s_Yo51zLfhpQ0
+  text_result_file: text_result.s_Yo51zLfhpQ0.csv
+  price_result_file: price_result.s_Yo51zLfhpQ0.csv
+
+  crop_size_and_offset: 1280x63+0+0
+
+- name: c_cFA59Fh4ENQ
+  input_path: /home/ubuntu/auction_videos/video_imgs/cFA59Fh4ENQ_Livestream | 20th_21st Century Art Evening Sales | Hong Kong
+  output_path:  /home/ubuntu/ocr_results/c_cFA59Fh4ENQ
+  text_result_file: text_result.c_cFA59Fh4ENQ.csv
+  price_result_file: price_result.c_cFA59Fh4ENQ.csv
+
+  crop_size_and_offset: 1280x123+0+0
+
+- name: s_chLjokEz_Wg
+  input_path: /home/ubuntu/auction_videos/video_imgs/chLjokEz_Wg_LIVE from New York | Master Paintings and Sculpture Part I
+  output_path:  /home/ubuntu/ocr_results/s_chLjokEz_Wg
+  text_result_file: text_result.s_chLjokEz_Wg.csv
+  price_result_file: price_result.s_chLjokEz_Wg.csv
+
+  crop_size_and_offset: 1280x127+0+0
+
+- name: c_e-ZW1dYzCVE
+  input_path: /home/ubuntu/auction_videos/video_imgs/e-ZW1dYzCVE_Livestream | 20th Century | Christie’s
+  output_path:  /home/ubuntu/ocr_results/c_e-ZW1dYzCVE
+  text_result_file: text_result.c_e-ZW1dYzCVE.csv
+  price_result_file: price_result.c_e-ZW1dYzCVE.csv
+
+  crop_size_and_offset: 1280x68+0+0
+
+# Offset needed, and image is relative small
+- name: c_eGANbzf1LF0
+  input_path: /home/ubuntu/auction_videos/video_imgs/eGANbzf1LF0_Livestream | Post-War and Contemporary Art Day Sale | New York
+  output_path:  /home/ubuntu/ocr_results/c_eGANbzf1LF0
+  text_result_file: text_result.c_eGANbzf1LF0.csv
+  price_result_file: price_result.c_eGANbzf1LF0.csv
+
+  crop_size_and_offset: 600x32+320+343
+
+- name: c_fgRAMkbSC-8
+  input_path: /home/ubuntu/auction_videos/video_imgs/fgRAMkbSC-8_Livestream | 21st Century Evening Sale | New York
+  output_path:  /home/ubuntu/ocr_results/c_fgRAMkbSC-8
+  text_result_file: text_result.c_fgRAMkbSC-8.csv
+  price_result_file: price_result.c_fgRAMkbSC-8.csv
+
+  crop_size_and_offset: 1280x58+0+0
+
+- name: c_g0OxqR4pz8U
+  input_path: /home/ubuntu/auction_videos/video_imgs/g0OxqR4pz8U_Livestream | 20th_21st Century Art Evening Sales | London
+  output_path:  /home/ubuntu/ocr_results/c_g0OxqR4pz8U
+  text_result_file: text_result.c_g0OxqR4pz8U.csv
+  price_result_file: price_result.c_g0OxqR4pz8U.csv
+
+  crop_size_and_offset: 1280x70+0+0
+
+- name: c_j_eWOIFnFes
+  input_path: /home/ubuntu/auction_videos/video_imgs/j_eWOIFnFes_Livestream | Masterpieces from the S.I. Newhouse Collection and the 20th Century Evening Sale
+  output_path:  /home/ubuntu/ocr_results/c_j_eWOIFnFes
+  text_result_file: text_result.c_j_eWOIFnFes.csv
+  price_result_file: price_result.c_j_eWOIFnFes.csv
+
+  crop_size_and_offset: 1280x58+0+0
+
+- name: s_mohDf0ebrJE
+  input_path: /home/ubuntu/auction_videos/video_imgs/mohDf0ebrJE_LIVE from London | Hotung & Old Masters Evening Auctions
+  output_path:  /home/ubuntu/ocr_results/s_mohDf0ebrJE
+  text_result_file: text_result.s_mohDf0ebrJE.csv
+  price_result_file: price_result.s_mohDf0ebrJE.csv
+
+  crop_size_and_offset: 1280x128+0+0
+
+- name: c_nJRNx4f193w
+  input_path: /home/ubuntu/auction_videos/video_imgs/nJRNx4f193w_Live Stream | 20th Century Art Evening Sale | Christie's
+  output_path:  /home/ubuntu/ocr_results/c_nJRNx4f193w
+  text_result_file: text_result.c_nJRNx4f193w.csv
+  price_result_file: price_result.c_nJRNx4f193w.csv
+
+  crop_size_and_offset: 1280x63+0+0
+
+# Skip this: transmission fax
+# - name: oFzhSFmWaew
+
+- name: s_oVCDT8gVC1c
+  input_path: /home/ubuntu/auction_videos/video_imgs/oVCDT8gVC1c_LIVE from New York | Modern Evening Auction
+  output_path:  /home/ubuntu/ocr_results/s_oVCDT8gVC1c
+  text_result_file: text_result.s_oVCDT8gVC1c.csv
+  price_result_file: price_result.s_oVCDT8gVC1c.csv
+
+  crop_size_and_offset: 1280x128+0+0
+
+- name: c_q_XEMZc--TI
+  input_path: /home/ubuntu/auction_videos/video_imgs/q_XEMZc--TI_Livestream | 21st Century Evening Sale | New York
+  output_path:  /home/ubuntu/ocr_results/c_q_XEMZc--TI
+  text_result_file: text_result.c_q_XEMZc--TI.csv
+  price_result_file: price_result.c_q_XEMZc--TI.csv
+
+  crop_size_and_offset: 1280x28+0+0
+
+- name: s_ssXTLEnki-0
+  input_path: /home/ubuntu/auction_videos/video_imgs/ssXTLEnki-0_LIVE from London | The Now and Modern & Contemporary Evening Auctions
+  output_path:  /home/ubuntu/ocr_results/s_ssXTLEnki-0
+  text_result_file: text_result.s_ssXTLEnki-0.csv
+  price_result_file: price_result.s_ssXTLEnki-0.csv
+
+  crop_size_and_offset: 1280x128+0+0
+
+# This input path is a string, because it has a colon.
+- name: c_uoA5uwRf-5Y
+  input_path: '/home/ubuntu/auction_videos/video_imgs/uoA5uwRf-5Y_Livestream | Visionary: The Paul G. Allen Collection Part II | New York'
+  output_path:  /home/ubuntu/ocr_results/c_uoA5uwRf-5Y
+  text_result_file: text_result.c_uoA5uwRf-5Y.csv
+  price_result_file: price_result.c_uoA5uwRf-5Y.csv
+
+  crop_size_and_offset: 1280x62+0+0
