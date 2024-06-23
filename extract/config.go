@@ -27,6 +27,10 @@ type AuctionConfig struct {
 	TitleIndex                 int    `yaml:"title_index"`
 	PriceIndex                 int    `yaml:"price_index"`
 
+	ExtractEstimatePattern string `yaml:"extract_estimation_pattern"`
+	EstimateLowIndex       int    `yaml:"estimation_low_index"`
+	EstimateHighIndex      int    `yaml:"estimation_high_index"`
+
 	CropSizeAndOffset string `yaml:"crop_size_and_offset"`
 	PSM               string `yaml:"psm"`
 	//if -1 then not using PSM

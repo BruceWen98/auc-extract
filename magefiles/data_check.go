@@ -87,6 +87,8 @@ func (DataCheck) T03_sample_frame(aucIndex int) {
 
 		itemIndex, title, price, confidence := extract.SearchPrice(text, auc)
 		log.Printf("itemIndex:%s, title:%s, price:%.2f, confidence:%d", itemIndex, title, price, confidence)
+		lowEst, highEst := extract.SearchEstimation(text, auc)
+		log.Printf("lowEst:%.2f, highEst:%.2f", lowEst, highEst)
 		log.Printf("-----------------------")
 	}
 }
@@ -105,6 +107,9 @@ func (DataCheck) T04_extract_a_frame(aucIndex int, frameId int) {
 
 	itemIndex, title, price, confidence := extract.SearchPrice(text, auc)
 	log.Printf("itemIndex:%s, title:%s, price:%.2f, confidence:%d", itemIndex, title, price, confidence)
+
+	lowEst, highEst := extract.SearchEstimation(text, auc)
+	log.Printf("lowEst:%.2f, highEst:%.2f", lowEst, highEst)
 }
 
 // download the frame jpg files

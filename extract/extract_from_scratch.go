@@ -20,12 +20,14 @@ type AuctionText struct {
 }
 
 type AuctionPrice struct {
-	timeIndex int
-	itemIndex string
-	title     string
-	price     float64
+	timeIndex    int
+	itemIndex    string
+	title        string
+	price        float64
+	lowEstimate  float64
+	highEstimate float64
 
-	confidence int
+	confidence int //for price
 }
 
 func ExtractAuction(threads int, auc AuctionConfig) {
@@ -64,17 +66,21 @@ func ExtractAuction(threads int, auc AuctionConfig) {
 			defer wgResult.Done()
 			for res := range resCh {
 				itemIndex, title, price, confidence := SearchPrice(res.text, auc)
+				lowEst, highEst := SearchEstimation(res.text, auc)
+
 				percentDone := float64(res.timeIndex-auc.StartFrame) / float64(auc.EndFrame-auc.StartFrame) * 100.0
 				if (res.timeIndex-auc.StartFrame)%auc.ReportInterval == 0 {
 					log.Printf("Has processed %.2f%% items, elapsed time: %.2f min", percentDone, time.Since(startTime).Minutes())
 				}
 				muPrice.Lock()
 				priceResult = append(priceResult, AuctionPrice{
-					timeIndex:  res.timeIndex,
-					itemIndex:  itemIndex,
-					title:      title,
-					price:      price,
-					confidence: confidence,
+					timeIndex:    res.timeIndex,
+					itemIndex:    itemIndex,
+					title:        title,
+					price:        price,
+					confidence:   confidence,
+					lowEstimate:  lowEst,
+					highEstimate: highEst,
 				})
 				muPrice.Unlock()
 			}
@@ -118,6 +124,33 @@ func matchPrice(text, pat string, auc AuctionConfig) (bool, string, string, floa
 	return false, itemIndex, title, price
 }
 
+func matchEstimation(text, pat string, auc AuctionConfig) (bool, float64, float64) {
+	var lowEstimate float64
+	var highEstimate float64
+
+	re := regexp.MustCompile(pat)
+	reNonDigit := regexp.MustCompile(`[^0-9]+`)
+	matches := re.FindStringSubmatch(text)
+	if matches != nil { //matched
+		var err error
+		lowEstimateText := matches[auc.EstimateLowIndex]
+		highEstimateText := matches[auc.EstimateHighIndex]
+		lowEstimateText = reNonDigit.ReplaceAllString(lowEstimateText, "")
+		highEstimateText = reNonDigit.ReplaceAllString(highEstimateText, "")
+
+		lowEstimate, err = strconv.ParseFloat(lowEstimateText, 64)
+		if err != nil {
+			log.Printf("failed to convert low estimate to int: %v", err)
+		}
+		highEstimate, err = strconv.ParseFloat(highEstimateText, 64)
+		if err != nil {
+			log.Printf("failed to convert high estimate to int: %v", err)
+		}
+		return true, lowEstimate, highEstimate
+	}
+	return false, lowEstimate, highEstimate
+}
+
 func SearchPrice(text string, auc AuctionConfig) (string, string, float64, int) {
 	var itemIndex string
 	var price float64
@@ -134,6 +167,18 @@ func SearchPrice(text string, auc AuctionConfig) (string, string, float64, int) 
 		return itemIndex, title, price, 85
 	}
 	return itemIndex, title, price, 0
+}
+
+func SearchEstimation(text string, auc AuctionConfig) (float64, float64) {
+	var lowEstimate float64
+	var highEstimate float64
+	var matched bool
+
+	matched, lowEstimate, highEstimate = matchEstimation(text, auc.ExtractEstimatePattern, auc)
+	if matched {
+		return lowEstimate, highEstimate
+	}
+	return lowEstimate, highEstimate
 }
 
 func saveTextResult(auc AuctionConfig, textResult []AuctionText) {
@@ -161,6 +206,8 @@ func savePriceResult(auc AuctionConfig, priceResult []AuctionPrice) {
 			res.title,
 			strconv.FormatFloat(res.price, 'f', 2, 64),
 			strconv.Itoa(res.confidence),
+			strconv.FormatFloat(res.lowEstimate, 'f', 2, 64),
+			strconv.FormatFloat(res.highEstimate, 'f', 2, 64),
 		})
 	}
 	w.Flush()
